@@ -10,13 +10,15 @@ from typing import Any
 
 try:
     import websockets
-    from websockets.server import WebSocketServerProtocol
 except ImportError:
     print("Error: websockets library not found. Install with: pip install websockets")
     sys.exit(1)
 
-from src.example.api.api_client import ApiClient
-from src.example.business.service import UserService
+# Add project root to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+from example.api.api_client import ApiClient
+from example.business.service import UserService
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -206,7 +208,7 @@ class MCPServer:
                 "id": req_id
             }
 
-    async def handle_client(self, websocket: WebSocketServerProtocol, path: str) -> None:
+    async def handle_client(self, websocket) -> None:
         """Handle client connections."""
         client_id = id(websocket)
         logger.info(f"Client {client_id} connected")
@@ -228,10 +230,11 @@ class MCPServer:
                         }
                     }
                     await websocket.send(json.dumps(error_response))
-        except websockets.exceptions.ConnectionClosed:
-            logger.info(f"Client {client_id} disconnected")
         except Exception as e:
-            logger.error(f"Error handling client {client_id}: {e}")
+            if "connection closed" not in str(e).lower():
+                logger.error(f"Error handling client {client_id}: {e}")
+            else:
+                logger.info(f"Client {client_id} disconnected")
 
 
 async def main():
