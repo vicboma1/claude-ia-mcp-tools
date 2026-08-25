@@ -1,0 +1,7 @@
+mcp>=0.9.0,<1.0
+httpx
+pytest
+pytest-cov
+ruff
+mypy
+build
