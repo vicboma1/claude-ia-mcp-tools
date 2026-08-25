@@ -71,6 +71,18 @@ Or Claude
 }
 ```
 
+Or vía online
+
+```
+ curl -X POST https://claude-ia-mcp-tools-staging.up.railway.app/mcp \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"get_user","arguments":{"user_id":1}},"id":2}'
+
+Response:
+{"jsonrpc": "2.0", "result": {"content": [{"type": "text", "text": "{\"id\": 1, \"name\": \"Leanne Graham\", \"email\": \"Sincere@april.biz\", \"username\": \"Bret\"}"}]}, "id": 2}
+
+```
+
 ## Important
 
 This is a self-contained architectural example. The API client uses
