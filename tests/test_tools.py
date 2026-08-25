@@ -1,7 +1,11 @@
 """Test suite for MCP server tools with corner cases."""
 
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
 import pytest
-from src.example.business.service import UserService
+from example.business.service import UserService
 
 
 class FakeApiClient:
