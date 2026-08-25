@@ -1,5 +1,6 @@
 mcp>=0.9.0,<1.0
 httpx
+websockets>=12.0
 pytest
 pytest-cov
 ruff

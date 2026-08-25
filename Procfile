@@ -1,1 +1,1 @@
-web: python src/example/api/http_server.py
+web: python src/example/api/websocket_server.py
