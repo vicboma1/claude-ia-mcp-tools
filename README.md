@@ -51,6 +51,26 @@ Or configure the MCP client to launch:
 python -m src.example.mcp.server
 ```
 
+## Use MCP server
+Via terminal
+
+```
+{"jsonrpc":"2.0","method":"tools/list","id":1}
+```
+
+Or Claude
+
+```mcp_config.json:
+{
+  "mcpServers": {
+    "example-users": {
+      "command": "python",
+      "args": ["-m", "src.example.mcp.server"]
+    }
+  }
+}
+```
+
 ## Important
 
 This is a self-contained architectural example. The API client uses
