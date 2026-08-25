@@ -1,5 +1,5 @@
 from typing import Any
-from src.example.api.api_client import ApiClient
+from example.api.api_client import ApiClient
 
 
 class UserService:
