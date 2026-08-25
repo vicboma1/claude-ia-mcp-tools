@@ -78,3 +78,4 @@ This is a self-contained architectural example. The API client uses
 
 For a real API, replace `ApiClient` implementation and keep the business/MCP
 interfaces essentially unchanged.
+# Test workflow execution
