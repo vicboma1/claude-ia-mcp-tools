@@ -71,17 +71,57 @@ Or Claude
 }
 ```
 
-Or vía online
+Or vía WebSocket (Railway deployment)
 
+**Live on Railway:**
 ```
- curl -X POST https://claude-ia-mcp-tools-staging.up.railway.app/mcp \
-  -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"get_user","arguments":{"user_id":1}},"id":2}'
-
-Response:
-{"jsonrpc": "2.0", "result": {"content": [{"type": "text", "text": "{\"id\": 1, \"name\": \"Leanne Graham\", \"email\": \"Sincere@april.biz\", \"username\": \"Bret\"}"}]}, "id": 2}
-
+wss://claude-ia-mcp-tools-staging.up.railway.app
 ```
+
+**Connect with Python:**
+```python
+import asyncio
+import json
+import websockets
+
+async def call_mcp():
+    uri = "wss://claude-ia-mcp-tools-staging.up.railway.app"
+    async with websockets.connect(uri) as ws:
+        # Call get_user
+        request = {
+            "jsonrpc": "2.0",
+            "method": "tools/call",
+            "params": {
+                "name": "get_user",
+                "arguments": {"user_id": 1}
+            },
+            "id": 1
+        }
+        await ws.send(json.dumps(request))
+        response = await ws.recv()
+        print(json.loads(response))
+
+asyncio.run(call_mcp())
+```
+
+**Configure in Claude Desktop:**
+```json
+{
+  "mcpServers": {
+    "claude-ia-mcp-tools": {
+      "command": "uvx",
+      "args": ["mcp-websocket-client", "wss://claude-ia-mcp-tools-staging.up.railway.app"]
+    }
+  }
+}
+```
+
+**Available Tools:**
+- `get_user` - Get one user by ID
+- `list_users` - List all users
+- `create_user` - Create a new user
+- `update_user` - Update user name/email
+- `delete_user` - Delete a user
 
 ## Important
 
