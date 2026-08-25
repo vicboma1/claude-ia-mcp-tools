@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "example-users-mcp"
+version = "1.0.0"
+description = "Example MCP server for user management"
+requires-python = ">=3.9"
+dependencies = [
+    "mcp>=0.9.0,<1.0",
+    "httpx",
+]
+
+[project.scripts]
+example-users-mcp = "src.example.mcp.server:run_server"
