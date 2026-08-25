@@ -1,1 +1,1 @@
-web: python -m src.example.mcp.server
+web: python src/example/api/http_server.py
